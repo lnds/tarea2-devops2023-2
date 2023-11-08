@@ -1,0 +1,37 @@
+version: '3'
+services:
+  movies-front:
+    # completa esta seccion, lee el archivo README en la carpeta movies-front 
+    volumes:
+      - ./movies-front:/usr/app
+      - /usr/app/node_modules
+    depends_on: 
+    # de que servicio depende el frontend?
+   
+  movies-api:
+    # completa esta seccion, lee el archivo README en la carpeta movies-api
+  
+  postgres:
+    image: postgres:15.3
+    restart: always
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_PORT
+    expose:
+      - ${POSTGRES_PORT}
+
+  flyway:
+    image: flyway/flyway:latest
+    container_name: migration_flyway
+    environment:
+      - FLYWAY_USER=${POSTGRES_USER}
+      - FLYWAY_PASSWORD=${POSTGRES_PASSWORD}
+      - FLYWAY_URL=jdbc:postgresql://${POSTGRES_SERVER}:${POSTGRES_PORT}/${POSTGRES_DB}
+      - FLYWAY_GROUP=true
+    command: -locations=filesystem:/flyway/sql -connectRetries=60 migrate
+    volumes:
+      - ./sql_migrations:/flyway/sql
+    depends_on:
+      - postgres
