@@ -4,7 +4,7 @@ Gracias al éxito de la aplicación de libros en Flask, les han encargado la con
 
 Dado que la aplicación tendrá mayor demanda se han cambiado las tecnologías, el backend está escrito en go y se encuentra en la carpeta `movies-api`.
 
-El frontend es una aplicación REACT en Javascript.
+El frontend es una aplicación REACT en Javascript. Y se encuentra en la carpeta `movies-front`.
 
 # Actividades
 
@@ -18,7 +18,7 @@ El frontend es una aplicación REACT en Javascript.
 
 # Preguntas
 
-1.- Revisa el contenido del diretorio sql_migrations. ¿Cuál es la diferencia entre los archivos con el verbo Create con los archivos con el verbo Add?
+1.- Revisa el contenido del directorio sql_migrations. ¿Cuál es la diferencia entre los archivos con el verbo Create con los archivos con el verbo Add?
 
 2.- ¿Qué pasa si cambias el nombre del servicio de postgres a db? ¿Qué otros cambios tendrías que hacer?
 
