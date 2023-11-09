@@ -4,7 +4,7 @@ Gracias al éxito de la aplicación de libros en Flask, les han encargado la con
 
 Dado que la aplicación tendrá mayor demanda se han cambiado las tecnologías, el backend está escrito en go y se encuentra en la carpeta `movies-api`.
 
-El frontend es una aplicación REACT en Javascript.
+El frontend es una aplicación REACT en Javascript. Y se encuentra en la carpeta `movies-front`.
 
 # Actividades
 
