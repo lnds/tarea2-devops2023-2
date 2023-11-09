@@ -43,3 +43,4 @@ Recuerda responder en el archivo `RESPUESTAS.md` y agregar tu nombre en ese arch
 No se corregirá si el PR no trae el archivo `RESPUESTAS.md` y si no incluye el nombre del alumno.
 
 0.2 puntos extras por detectar errores en el enunciado (deben enviar la corrección como un pull request, si es aceptada la corrección se avisará en el foro del curso).
+0.5 puntos extras si se proponen mejoras a los archivos fuentes (go, javascript o los dockerfile provistos).
