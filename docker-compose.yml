@@ -1,24 +1,55 @@
 version: '3'
 services:
+  
   movies-front:
-    # completa esta seccion, lee el archivo README en la carpeta movies-front 
+    build: 
+      context: ./movies-front/
+      dockerfile: Dockerfile
+    environment:
+      - REACT_PORT=${REACT_PORT}
+      - REACT_APP_API_URI=${REACT_APP_API_URI}
+    container_name: movies-front  
+    ports:
+      - "${REACT_PORT}:${REACT_PORT}"
     volumes:
       - ./movies-front:/usr/app
       - /usr/app/node_modules
-    depends_on: 
-    # de que servicio depende el frontend?
-   
+    depends_on:
+      - movies-api
+    command: npm start
+
+ 
   movies-api:
-    # completa esta seccion, lee el archivo README en la carpeta movies-api
-  
+    depends_on:
+      - postgres
+      - flyway
+    restart: always
+    build: 
+      context: ./movies-api/
+      target: build-release-stage
+      dockerfile: Dockerfile
+    container_name: movies-api
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_SERVER=${POSTGRES_SERVER}
+      - BIND_IP=${BIND_IP}
+      - BIND_PORT=${BIND_PORT}
+    ports:
+      - "${BIND_PORT}:${BIND_PORT}"
+    command: /movies-api -b ${BIND_IP} -p ${BIND_PORT}
+   
   postgres:
     image: postgres:15.3
     restart: always
+    container_name: postgres-db
     environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - POSTGRES_PORT
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PORT=${POSTGRES_PORT}
     expose:
       - ${POSTGRES_PORT}
 
