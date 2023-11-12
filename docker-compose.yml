@@ -1,10 +1,13 @@
 version: '3'
 services:
   movies-front:
+    build:
+      context: ./movies-front
+      dockerfile: Dockerfile
     volumes:
       - ./movies-front:/usr/app
       - /usr/app/node_modules
-    depends_on: 
+    depends_on:
       - movies-api
     environment:
       - REACT_PORT=${BIND_PORT}
@@ -12,6 +15,9 @@ services:
     command: npm start
 
   movies-api:
+    build:
+      context: ./movies-api
+      dockerfile: Dockerfile
     environment:
       - BIND_IP=${BIND_IP}
       - BIND_PORT=${BIND_PORT}
