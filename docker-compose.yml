@@ -10,8 +10,8 @@ services:
     depends_on:
       - movies-api
     environment:
-      - REACT_PORT=${BIND_PORT}
-      - REACT_APP_API_URI=http://movies-api:${BIND_PORT}
+      - REACT_PORT
+      - REACT_APP_API_URI
     command: npm start
 
   movies-api:
@@ -19,15 +19,15 @@ services:
       context: ./movies-api
       dockerfile: Dockerfile
     environment:
-      - BIND_IP=${BIND_IP}
-      - BIND_PORT=${BIND_PORT}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_SERVER=${POSTGRES_SERVER}
-      - POSTGRES_PORT=${POSTGRES_PORT}
+      - BIND_IP
+      - BIND_PORT
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_SERVER
+      - POSTGRES_PORT
     command: movies-api -b ${BIND_IP} -p ${BIND_PORT}
-  
+
   postgres:
     image: postgres:15.3
     restart: always
