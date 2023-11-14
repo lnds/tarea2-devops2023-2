@@ -8,7 +8,7 @@
 
 2.- ¿Qué pasa si cambias el nombre del servicio de postgres a db? ¿Qué otros cambios tendrías que hacer?
 
-> Si cambio el nombre del servicio, también debería cambiarlo en la variable de entorno `POSTGRES_SERVER` del archivo `.env`. Sin embargo, en mi caso, no estoy utilizando el nombre del servicio para darle el valor a `POSTGRES_SERVER`, ya que, establecí la propiedad `container_name` en el docker-compose.yml y utilizo ese valor.
+> No levantaria los servicios flyway y movies-api, ya que dependen del servicio postgres. Sin embargo, si cambio el nombre del servicio, tambien debería cambiar los depends_on del servicio flyway y movies-api. Además, se debería cambiar en la variable de entorno `POSTGRES_SERVER` del archivo `.env`. Sin embargo, en mi caso, no estoy utilizando el nombre del servicio para darle el valor a `POSTGRES_SERVER`, ya que, establecí la propiedad `container_name` en el docker-compose.yml y utilizo ese valor.
 
 3.- Si quisieramos que el servicio movies-api use el puerto 81, ¿Qué cambios habría que hacer? 
 
@@ -41,3 +41,7 @@
 1. En las carpetas `movies-api` y `movies-front` se incluye el archivo `.dockerignore`con el proposito de optimizar el proceso de construcción de la imagen, excluyendo aquellos archivos que no son esenciales para la ejecución del contenedor y que están relacionados con el entorno de desarrollo o construcción.
 
 2. En el DockerFile de `movies-front`, en el comando `npm install --quiet` se agrega `--frozen-lockfile` para evitar que se modifique el archivo `package-lock.json` y así optimizar la construcción del contenedor Docker.
+
+### Nota
+
+- Anteriormente habia enviado un Pull Request que cancelé con un cambio en el Dockerfile del movies-front. El pull request era el #2 y  que cambié la linea `COPY . ..` por `COPY . .`. Yo pensaba que era un error, ya que al poner 2 punto al final suponia que copiaba el contenido una carpeta mas arriba del contenedor. Sin embargo funciona de las 2 formas, tanto con `COPY . ..` como con `COPY . .` 
