@@ -28,4 +28,3 @@ WORKDIR /
 COPY --from=build-stage /movies-api /movies-api
 
 USER nonroot:nonroot
-
