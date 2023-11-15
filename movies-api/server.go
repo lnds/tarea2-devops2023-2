@@ -7,7 +7,7 @@ import (
 	"github.com/lnds/lab-ic-ms/api/handlers"
 )
 
-func server(bind, port string) {
+func server(bind string, port string) {
 	database.ConnectDb(database.GetDSN())
 
 	app := fiber.New()

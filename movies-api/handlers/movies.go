@@ -3,7 +3,6 @@ package handlers
 import (
 	"github.com/lnds/lab-ic-ms/api/database"
 	"github.com/lnds/lab-ic-ms/api/models"
-
 	"github.com/gofiber/fiber/v2"
 )
 
