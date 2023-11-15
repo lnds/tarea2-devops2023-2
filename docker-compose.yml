@@ -28,7 +28,7 @@ services:
       - POSTGRES_DB
       - POSTGRES_SERVER
       - POSTGRES_PORT
-    command: movies-api -b ${BIND_IP} -p ${BIND_PORT}
+    command: ./movies-api -b ${BIND_IP} -p ${BIND_PORT}
     ports:
       - 8080:8080
 
