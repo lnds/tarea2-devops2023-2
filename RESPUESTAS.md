@@ -22,7 +22,7 @@ Los archivos con el verbo Add, en cambio, son los responsables de poblar con dat
 
 Resp 2:
 
-Al cambiar el nombre del servicio de postgres a db, conlleva también realizar cambios en:
+Al cambiar el nombre del servicio de postgres a db, se deben realizar además los siguientes cambios en:
 1.- cambiar el nombre de postgres a db en la dependencia de movie-api
 2.- cambiar el nombre de postgres a db en la dependecia de flyway
 3.- cambiar el valor de la variable POSTGRES_DB, en el archivo .env, de postgres a db
@@ -33,7 +33,7 @@ Al cambiar el nombre del servicio de postgres a db, conlleva también realizar c
 3.- Si quisieramos que el servicio movies-api use el puerto 81, ¿Qué cambios habría que hacer?
 
 Resp 3:
-Al cambiar el servicio movies-api para que use el puerto 81, se deben realizar los siguientes cambios en:
+Al cambiar el servicio movies-api para que use el puerto 81, se deben realizar los siguiente:
 1.- modificar el valor de la variable BIND_PORT, en el archivo .env, de 8000 a 81
 2.- modificar el valor de la variable REACT_APP_API_URI, en el archivo .env, de http://localhost:8000 a http://localhost:81
 
@@ -48,11 +48,9 @@ La variable de entorno BIND_IP se utiliza para especificar la dirección IP a la
 
 Cuando se establece el bind IP en 0.0.0.0, significa que el servidor está configurado para escuchar en todas las interfaces de red disponibles en el sistema. En términos simples, el servidor está abierto para aceptar conexiones entrantes desde cualquier dirección IP disponible en la máquina.
 
-El servidor web configurado con el bind IP en 0.0.0.0, escuchando y aceptando conexiones tanto desde la red local (127.0.0.1 o localhost) como desde cualquier otra red externa a la que esté conectado el servidor.
+Por tanto, al asignarle el valor de localhost a BIND_IP, el front no logra conectarse con movies-api, y no responde el back con las solicitudes del front. Debido a que en Docker, los contenedores pueden estar en diferentes redes y, por defecto, se ejecutan aislados unos de otros. Cada contenedor tiene su propia interfaz de red y su propia dirección IP dentro de la red a la que está conectado.
 
-Por tanto, al asignarle el valor de localhost a bind IP, el front no logra conectarse con movies-api, y no responde el back con las solicitudes del front. Debido a que en Docker, los contenedores pueden estar en diferentes redes y, por defecto, se ejecutan aislados unos de otros. Cada contenedor tiene su propia interfaz de red y su propia dirección IP dentro de la red a la que está conectado.
-
-Si estableces la variable de entorno BIND_IP de un contenedor a localhost, este contenedor solo escuchará conexiones que se originen dentro del mismo contenedor. En un entorno Docker donde los contenedores están en diferentes redes, si un contenedor A tiene su BIND_IP configurado como localhost, no podrá recibir conexiones de otros contenedores ya que localhost se refiere al contenedor en sí mismo y no a los otros contenedores de Docker en diferentes redes.
+Si se establece la variable de entorno BIND_IP de un contenedor a localhost, este contenedor solo escuchará conexiones que se originen dentro del mismo contenedor. En un entorno Docker donde los contenedores están en diferentes redes, si un contenedor "A" tiene su BIND_IP configurado como localhost, no podrá recibir conexiones de otros contenedores ya que localhost se refiere al contenedor en sí mismo y no a los otros contenedores de Docker en diferentes redes.
 
 
 
