@@ -11,7 +11,11 @@
 
 # 3.- Si quisiéramos que el servicio movies-api use el puerto 81, ¿Qué cambios habría que hacer? 
 
-## 
+## Para que la aplicacion funcine en su conjunto es necesario modificar: 
+## - Puertos en movies-api (81:81)
+## - los siguientes valores en .env:
+##  - REACT_APP_API_URI='http://localhost:81'
+##  - BIND_PORT=81
 
 # 4.- ¿Qué pasa si a la variable de ambiente `BIND_IP` le asignas el valor localhost?
 
