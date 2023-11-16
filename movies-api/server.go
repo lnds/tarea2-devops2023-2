@@ -12,7 +12,10 @@ func server(bind string, port string) {
 
 	app := fiber.New()
 
-	app.Use(cors.New())
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST,OPTIONS",
+	}))
 
 	setupRoutes(app)
 

@@ -4,6 +4,7 @@ services:
     build:
       context: ./movies-front
       dockerfile: Dockerfile
+    container_name: movies-front
     ports:
       - 3000:3000
     environment:
@@ -20,6 +21,8 @@ services:
     build:
       context: ./movies-api
       dockerfile: Dockerfile
+      target: build-release-stage
+    container_name: movies-api 
     ports:
       - 8000:8000
     expose:
