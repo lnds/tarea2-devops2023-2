@@ -2,36 +2,37 @@ version: '3'
 services:
   movies-front:
     build:
-      context: ./movies-front
-      dockerfile: Dockerfile
+      context: ./movies-front/
+    command: npm start
+    ports:
+      - 3000:3000
     volumes:
-      - ./movies-front:/usr/app
+      - ./movies-front/:/usr/app
       - /usr/app/node_modules
     depends_on:
       - movies-api
     environment:
       - REACT_PORT
       - REACT_APP_API_URI
-    command: npm start
-    ports:
-      - 3000:3000
 
   movies-api:
     build:
       context: ./movies-api
-      dockerfile: Dockerfile
-    environment:
-      - BIND_IP
-      - BIND_PORT
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - POSTGRES_SERVER
-      - POSTGRES_PORT
     command: ./movies-api -b ${BIND_IP} -p ${BIND_PORT}
     ports:
       - 8000:8000
-
+    volumes:
+      - ./movies-api:/app
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_PORT
+      - POSTGRES_SERVER
+    depends_on:
+      postgres:
+        condition: service_healthy
+  
   postgres:
     image: postgres:15.3
     restart: always
