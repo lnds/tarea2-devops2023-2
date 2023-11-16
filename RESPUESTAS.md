@@ -13,9 +13,8 @@
 
 ## Para que la aplicacion funcine en su conjunto es necesario modificar: 
 ## - Puertos en movies-api (81:81)
-## - los siguientes valores en .env:
-##  - REACT_APP_API_URI='http://localhost:81'
-##  - BIND_PORT=81
+## - REACT_APP_API_URI='http://localhost:81' en .env
+## - BIND_PORT=81 en .env
 
 # 4.- ¿Qué pasa si a la variable de ambiente `BIND_IP` le asignas el valor localhost?
 
