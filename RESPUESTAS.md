@@ -6,7 +6,8 @@
 
 # 2.- ¿Qué pasa si cambias el nombre del servicio de postgres a db? ¿Qué otros cambios tendrías que hacer?
 
-## 
+## Si solo se cambia el nombre de postgres a db, la aplicación no puede acceder a la base de datos, el despliegue de directores y movies se ve en blanco. 
+## Los otros elementos que se deberían cambiar están en el docker-compose.yml, y corresponden al nombre del contenedor postgres => db, a la dependencia de los contenedores flyway y movies-api, que también deben cambiar de postgres a db.
 
 # 3.- Si quisiéramos que el servicio movies-api use el puerto 81, ¿Qué cambios habría que hacer? 
 
