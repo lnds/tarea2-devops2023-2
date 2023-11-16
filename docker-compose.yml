@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: movies-front
     ports:
-      - 3000:3000
+      - ${REACT_PORT}:${REACT_PORT}
     environment:
       - REACT_PORT
       - REACT_APP_API_URI
@@ -24,9 +24,9 @@ services:
       target: build-release-stage
     container_name: movies-api 
     ports:
-      - 8000:8000
+      - ${BIND_PORT}:${BIND_PORT}
     expose:
-      - 8000
+      - ${BIND_PORT}
     environment:
       - BIND_IP
       - BIND_PORT
@@ -43,14 +43,15 @@ services:
   postgres:
     image: postgres:15.3
     restart: always
+    container_name: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_DB
       - POSTGRES_SERVER
       - POSTGRES_PORT
-    ports:
-      - 5432:5432
     expose:
       - ${POSTGRES_PORT}
     healthcheck:
@@ -67,3 +68,6 @@ services:
     command: ["-url=jdbc:postgresql://${POSTGRES_SERVER}:${POSTGRES_PORT}/${POSTGRES_DB}", "-user=${POSTGRES_USER}", "-password=${POSTGRES_PASSWORD}", "migrate"]
     depends_on:
       - postgres
+
+volumes:
+  db-data:
