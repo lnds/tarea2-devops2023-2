@@ -1,19 +1,46 @@
 version: '3'
 services:
   movies-front:
-    # completa esta seccion, lee el archivo README en la carpeta movies-front 
+    build:
+      context: ./movies-front/
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_PORT
+      - REACT_APP_API_URI
+    command: ["npm", "start"]
     volumes:
       - ./movies-front:/usr/app
       - /usr/app/node_modules
     depends_on: 
-    # de que servicio depende el frontend?
+      - movies-api
    
   movies-api:
-    # completa esta seccion, lee el archivo README en la carpeta movies-api
+    build:
+      context: ./movies-api/
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - BIND_IP
+      - BIND_PORT
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_SERVER
+      - POSTGRES_PORT
+    command: ["/movies-api", "-b", "${BIND_IP}", "-p", "${BIND_PORT}"]
+    depends_on:
+      - postgres
   
   postgres:
+    container_name: db
     image: postgres:15.3
     restart: always
+    user: ${POSTGRES_USER}
+    volumes:
+      - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
@@ -21,6 +48,8 @@ services:
       - POSTGRES_PORT
     expose:
       - ${POSTGRES_PORT}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
 
   flyway:
     image: flyway/flyway:latest
@@ -35,3 +64,6 @@ services:
       - ./sql_migrations:/flyway/sql
     depends_on:
       - postgres
+volumes:
+  db-data:
+

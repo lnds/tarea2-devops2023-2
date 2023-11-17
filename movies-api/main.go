@@ -1,12 +1,18 @@
 package main
 
 import (
+	"os"
 	"github.com/spf13/cobra"
 )
 
 func main() {
 	var bind string
 	var port string = "8080"
+
+	envPort := os.Getenv("BIND_PORT")
+	if envPort != "" {
+		port = envPort
+	}
 
 	var rootCmd = &cobra.Command{
 		Use:   "api",
