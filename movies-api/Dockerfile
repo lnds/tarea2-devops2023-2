@@ -15,7 +15,7 @@ RUN go mod download
 COPY ./ ./
 
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /movies-api
+RUN CGO_ENABLED=0 GOOS=linux go build -o /movies-api .
 
 ##
 ## Deploy the application binary into a lean image
