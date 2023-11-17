@@ -16,6 +16,8 @@ Para modificar el puerto a 81 implica cambiar el puerto de salida en el servicio
 
 4.- ¿Qué pasa si a la variable de ambiente `BIND_IP` le asignas el valor localhost?
 
+Si bien la aplicación no genera errores en su creación y se puede levantar, el frontend no se logra conectar con el backend de forma correcta por lo que no retorna la información necesaria de la base de datos.
+
 5.- Revisa el archivo `Dockerfile` en la carpeta `movies-api`. ¿Qué te llama la atención? Trata de explicar lo que ocurre en este caso.
 
 Dentro del dockerfile se esta haciendo multi-stage-build desde una imagen con golang a una con base debian, por lo general esto se utiliza para crear imagenes mas livianas y dejar solo los componentes que necesito de cada una.

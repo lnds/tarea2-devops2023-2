@@ -25,7 +25,7 @@ services:
       dockerfile: Dockerfile
     container_name: movies-api 
     ports:
-      - 8000:81
+      - 8000:8000
     environment:
       - BIND_IP
       - BIND_PORT
