@@ -28,4 +28,5 @@ WORKDIR /
 COPY --from=build-stage /movies-api /movies-api
 
 USER nonroot:nonroot
+CMD movies-api -b ${BIND_IP} -p ${BIND_PORT}
 
