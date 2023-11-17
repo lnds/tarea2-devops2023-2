@@ -4,11 +4,11 @@
 
 1.- Revisa el contenido del directorio sql_migrations. ¿Cuál es la diferencia entre los archivos con el verbo Create con los archivos con el verbo Add?
 
-
+Los archivos create son para crear las tablas con las estructuras definidas dentro de cada archivo create, mientras que los archivos add son para poblar con los datos dentro de los archivos las tablas creadas.
 
 2.- ¿Qué pasa si cambias el nombre del servicio de postgres a db? ¿Qué otros cambios tendrías que hacer?
 
-
+Si solo se cambia el nombre del servicio, tendremos errores ya que hay dependencias de otros servicios para que se ejecuten como lo son el movies-api y flyway. Otro cambio que debemos hacer para que se ejecute de forma correcta es modificar la variable POSTGRES_SERVER para que el backend movies-api se pueda conectar a la base de datos
 
 3.- Si quisieramos que el servicio movies-api use el puerto 81, ¿Qué cambios habría que hacer? 
 
