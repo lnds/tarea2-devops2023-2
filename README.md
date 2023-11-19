@@ -1,4 +1,4 @@
-# Tarea 3
+# Tarea 3 - Gerardo Alonso
 
 Gracias al éxito de la aplicación de libros en Flask, les han encargado la construcción de una app web para películas.
 
@@ -20,13 +20,32 @@ El frontend es una aplicación REACT en Javascript. Y se encuentra en la carpeta
 
 1.- Revisa el contenido del diretorio sql_migrations. ¿Cuál es la diferencia entre los archivos con el verbo Create con los archivos con el verbo Add?
 
+Los archivos CREATE son comandos sql para creación de tablas de base de datos, estos definen su estructura y los tipos de datos que contendran sus registros.
+Los archivos con ADD son comandos sql del tipo INSERT, es decir, sobre tablas previamente creadas genera registros o filas dentro de la tabla con la información y tipo de datos que estas esperan.
+
 2.- ¿Qué pasa si cambias el nombre del servicio de postgres a db? ¿Qué otros cambios tendrías que hacer?
 
-3.- Si quisieramos que el servicio movies-api use el puerto 81, ¿Qué cambios habría que hacer? 
+Al momento de tratar de levantar el servicio este fallará. El motivo es que hemos generado dependencias hacia este servicio en las sentencias "depends on:". En este ejercicio
+- movies-api
+- flyway
+Para poder mantener funcionando el conjunto se debe cambiar no solo el nombre en el servicio sino también en estas dependencias.
+
+3.- Si quisieramos que el servicio movies-api use el puerto 81, ¿Qué cambios habría que hacer?
+
+Bastaría con solo aplicar el cambio en el archivo .env, dado que se ha utilizando en forma paramétrica en el docker-compose.
+Luego, para acceder al servicio habría que ingresar haciendo uso de este nuevo puerto como sigue, http://localhost:81
 
 4.- ¿Qué pasa si a la variable de ambiente `BIND_IP` le asignas el valor localhost?
 
+Perdemos la conexión entre el front (movies-front) y el back (movies-api).
+Aparentemente al configurar localhost para el contenedor de docker, este asume que el resto de servicios se encuentra en el mismo entorno (contenedor), sin embargo, como hemos levantado front y
+back en diferentes contenedores se debe utilizar una dirección que permita conexiones externas como 0.0.0.0
+
 5.- Revisa el archivo `Dockerfile` en la carpeta `movies-api`. ¿Qué te llama la atención? Trata de explicar lo que ocurre en este caso.
+
+Acorde a lo que pude investigar, lo llamativo de este tipo de ejecución es el uso de go mod download. Este comando permite acelerar la construcción de contenedores docker al saltarse el paso de
+primero ejecutar los comandos go get ./... antes de generar la construcción en binario.
+Esto se traduce en que todas las dependencias de la imagen son capturadas previo a construir el docker container y en evitar un paso adicional en cada ejecución.
 
 Recuerda responder en el archivo `RESPUESTAS.md` y agregar tu nombre en ese archivo.
 
