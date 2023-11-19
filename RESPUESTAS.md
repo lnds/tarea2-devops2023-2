@@ -19,7 +19,7 @@
 
 # 4.- ¿Qué pasa si a la variable de ambiente `BIND_IP` le asignas el valor localhost?
 
-## Se ve el front de la aplicación, pero no se observan las pelicular, por lo que aparentemente no se esta teniendo acceso a la base de datos. 
+## Se ve el front de la aplicación, pero no se observan las peliculas, por lo que aparentemente no se esta teniendo acceso a la base de datos. 
 
 # 5.- Revisa el archivo `Dockerfile` en la carpeta `movies-api`. ¿Qué te llama la atención? Trata de explicar lo que ocurre en este caso.
 
