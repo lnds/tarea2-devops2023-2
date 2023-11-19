@@ -23,7 +23,7 @@
 
 # 5.- Revisa el archivo `Dockerfile` en la carpeta `movies-api`. ¿Qué te llama la atención? Trata de explicar lo que ocurre en este caso.
 
-## Me llama la atención el uso de dos imágenes, una para construir la aplicación y otra para montarla. 
+## Me llama la atención el uso de dos imágenes, una para construir la aplicación y otra para desplegarla. 
 
 ## A continuación se explica que ocurre en cada linea de código. 
 
