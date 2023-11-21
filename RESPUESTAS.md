@@ -40,7 +40,6 @@
 
     # copia todos los archivos y directorios del directorio actual al directorio /usr/app del contenedor
     COPY . ..
-
-
+---------------------------
 TAREA 2 - FRANKLIN CRUCES
-
+---------------------------
