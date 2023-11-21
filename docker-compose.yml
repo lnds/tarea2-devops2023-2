@@ -2,15 +2,38 @@ version: '3'
 services:
   movies-front:
     # completa esta seccion, lee el archivo README en la carpeta movies-front 
+    build:
+     context: ./movies-front/
+    command: npm start -a ${REACT_APP_API_URI} -p ${REACT_PORT}
+    ports:
+      - "${REACT_PORT}:${REACT_PORT}"
     volumes:
       - ./movies-front:/usr/app
       - /usr/app/node_modules
     depends_on: 
     # de que servicio depende el frontend?
-   
+     - movies-api
+    environment:
+     - REACT_PORT
+     - REACT_APP_API_URI
   movies-api:
     # completa esta seccion, lee el archivo README en la carpeta movies-api
-  
+   build:
+    context: ./movies-api
+   command: ./movies-api -b ${BIND_IP} -p ${BIND_PORT}
+   ports:
+    - 8000:8000
+   volumes:
+     -  ./movies-api:/app
+   environment:
+     - POSTGRES_USER
+     - POSTGRES_PASSWORD
+     - POSTGRES_DB
+     - POSTGRES_PORT
+     - POSTGRES_SERVER
+   depends_on:
+     - postgres
+      
   postgres:
     image: postgres:15.3
     restart: always
