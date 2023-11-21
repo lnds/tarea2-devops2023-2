@@ -22,7 +22,7 @@ services:
     context: ./movies-api
    command: ./movies-api -b ${BIND_IP} -p ${BIND_PORT}
    ports:
-    - 8000:8000
+    - "${BIND_PORT}:${BIND_PORT}"
    volumes:
      -  ./movies-api:/app
    environment:
