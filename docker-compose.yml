@@ -32,9 +32,9 @@ services:
      - POSTGRES_PORT
      - POSTGRES_SERVER
    depends_on:
-     - postgres
+     - db
       
-  postgres:
+  db:
     image: postgres:15.3
     restart: always
     environment:
@@ -57,4 +57,4 @@ services:
     volumes:
       - ./sql_migrations:/flyway/sql
     depends_on:
-      - postgres
+      - db
