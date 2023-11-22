@@ -1,13 +1,14 @@
 package main
 
 import (
+	"os"
 	"github.com/spf13/cobra"
 )
 
 func main() {
 	var bind string
-	var port string = "8080"
-
+	var port string = os.Getenv("BIND_PORT")
+	
 	var rootCmd = &cobra.Command{
 		Use:   "api",
 		Short: "run movie server",
