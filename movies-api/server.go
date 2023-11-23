@@ -7,13 +7,16 @@ import (
 	"github.com/lnds/lab-ic-ms/api/handlers"
 )
 
-func server(bind, port string) {
+func server(bind string, port string) {
 	database.ConnectDb(database.GetDSN())
 
 	app := fiber.New()
 
-	app.Use(cors.New())
-
+	//app.Use(cors.New())
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST,OPTIONS",
+	}))
 	setupRoutes(app)
 
 	app.Listen(bind + ":" + port)
