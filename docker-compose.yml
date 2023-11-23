@@ -2,16 +2,41 @@ version: '3'
 services:
   movies-front:
     # completa esta seccion, lee el archivo README en la carpeta movies-front 
+    build: ./movies-front
     volumes:
       - ./movies-front:/usr/app
       - /usr/app/node_modules
+    environment:
+      - REACT_PORT
+      - REACT_APP_API_URI
+    ports:
+      - ${REACT_PORT}:${REACT_PORT}
+    expose:
+      - ${REACT_PORT}
+    command: npm start
     depends_on: 
     # de que servicio depende el frontend?
+      - movies-api
    
   movies-api:
     # completa esta seccion, lee el archivo README en la carpeta movies-api
+    build: ./movies-api
+    environment:
+      - BIND_IP
+      - BIND_PORT
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_SERVER
+      - POSTGRES_PORT
+    ports:
+      - ${BIND_PORT}:${BIND_PORT}
+    command: ./movies-api -b ${BIND_IP} -p ${BIND_PORT}
+    depends_on: 
+      db:
+        condition: service_healthy
   
-  postgres:
+  db:
     image: postgres:15.3
     restart: always
     environment:
@@ -21,6 +46,11 @@ services:
       - POSTGRES_PORT
     expose:
       - ${POSTGRES_PORT}
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   flyway:
     image: flyway/flyway:latest
@@ -34,4 +64,4 @@ services:
     volumes:
       - ./sql_migrations:/flyway/sql
     depends_on:
-      - postgres
+      - db
