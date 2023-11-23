@@ -9,4 +9,4 @@
 4.- ¿Qué pasa si a la variable de ambiente BIND_IP le asignas el valor localhost?
     Cambiar la variable de entorno BIND_IP a localhost significa que el servicio movies-api solo escuchará conexiones en la interfaz de loopback. Esto puede ser problemático si esperas que tu aplicación sea accesible desde fuera del contenedor. 
 5.- Revisa el archivo Dockerfile en la carpeta movies-api. ¿Qué te llama la atención? Trata de explicar lo que ocurre en este caso.
-    que primero se copia el package y luego el resto de archivos
+    que primero se copia el package y luego el resto de archivos, dockerfile se esta haciendo multi-stage-build desde una imagen con golang a una con base debian, por lo general esto se utiliza para crear imagenes mas livianas
