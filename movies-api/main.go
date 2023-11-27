@@ -8,7 +8,7 @@ import (
 func main() {
 	//var bind string
 	//var port string = "8080"
-	var bind  := os.Getenv("BIND_IP")
+	var bind  string = os.Getenv("BIND_IP")
 	var port string = os.Getenv("BIND_PORT")
 
 	var rootCmd = &cobra.Command{

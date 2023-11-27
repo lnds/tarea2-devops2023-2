@@ -42,8 +42,6 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_SERVER=${POSTGRES_SERVER}
       - POSTGRES_PORT=${POSTGRES_PORT}
-    volumes:
-      - ./movies-api:app
     command: /movies-api -b ${BIND_IP} -p ${BIND_PORT}
     expose:
       - ${BIND_PORT}
